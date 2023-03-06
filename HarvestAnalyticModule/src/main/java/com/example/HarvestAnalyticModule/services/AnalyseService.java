@@ -19,11 +19,10 @@ public class AnalyseService {
         this.service = new RequestService();
     }
 
-    public Statistic getAnalytic(String projectId) {
+    public Statistic getAnalytic(String projectId, String token) {
 
-        List<Type> types = service.getTypes();
-        Component component = service.getComponent(projectId);
-
+        List<Type> types = service.getTypes(token);
+        Component component = service.getComponent(projectId, token);
 
         Type spacialType = types.stream().filter(x -> Objects.equals(x.getCode(), "TechnicalObject")).findFirst().orElse(null);
         Type technicalTypeType = types.stream().filter(x -> Objects.equals(x.getCode(), "Spatial Object")).findFirst().orElse(null);
@@ -31,7 +30,6 @@ public class AnalyseService {
 
         List<ObjectType> objectTypes = getObjects(new ArrayList<>(), component, wrongIds, types);
         List<Material> materials = getMaterials(new ArrayList<>(), component, wrongIds, types);
-
 
         Statistic s = new Statistic();
         s.setMaterials(materials);
@@ -67,7 +65,6 @@ public class AnalyseService {
 
         return objects;
     }
-
 
     List<Material> getMaterials (List<Material> materials, Component component, List<String> wrongIds, List<Type> types) {
         Type type = types.stream().filter(x -> x.get_id().equals(component.getType())).findFirst().orElse(null);

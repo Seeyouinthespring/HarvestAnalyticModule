@@ -58,23 +58,7 @@ public class Component {
         return children;
     }
 
-    public void setChildren(List<Component> children) {
-        this.children = children;
-    }
-
-    public String getObjectTypeId() {
-        return objectTypeId;
-    }
-
-    public void setObjectTypeId(String objectTypeId) {
-        this.objectTypeId = objectTypeId;
-    }
-
     public Map<String, Object> getPropertiesCumulated() {
         return propertiesCumulated;
-    }
-
-    public void setPropertiesCumulated(Map<String, Object> propertiesCumulated) {
-        this.propertiesCumulated = propertiesCumulated;
     }
 }

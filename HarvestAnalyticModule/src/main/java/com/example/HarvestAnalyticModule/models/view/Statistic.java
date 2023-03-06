@@ -1,6 +1,7 @@
+
 package com.example.HarvestAnalyticModule.models.view;
 
-import java.util.List;
+        import java.util.List;
 
 public class Statistic {
     private List<Material> materials;

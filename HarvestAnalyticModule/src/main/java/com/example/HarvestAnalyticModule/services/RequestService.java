@@ -8,10 +8,10 @@ import java.util.List;
 
 
 public class RequestService {
-
-    public Component getComponent(String id) {
+    public Component getComponent(String id, String token) {
         Component response = RestService.getWebClient().get()
                 .uri("api/components/" + id + "?fullHierarchy=true")
+                .headers(httpHeaders -> {httpHeaders.set("user-token", token);})
                 .retrieve()
                 .bodyToMono(Component.class)
                 .block();
@@ -19,20 +19,10 @@ public class RequestService {
         return response;
     }
 
-//    public static List<Type> getTypes() {
-//        Type[] response = RestService.getWebClient().get()
-//                .uri("api/types/" )
-//                .retrieve()
-//                .bodyToMono(Type[].class)
-//                .block();
-//        return Arrays.stream(response)
-//                .map(Type:getFavouriteBook).collect(Collectors.toList());
-//        //return response;
-//    }
-
-    public List<Type> getTypes() {
+    public List<Type> getTypes(String token) {
         List<Type> response = RestService.getWebClient().get()
                 .uri("api/components/types/" )
+                .headers(httpHeaders -> {httpHeaders.set("user-token", token);})
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<List<Type>>() {})
                 .block();
